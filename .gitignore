@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# Local data and outputs
+/data/*
+!/data/.gitkeep
+/checkpoint/*
+!/checkpoint/.gitkeep
+/output/*
+!/output/.gitkeep
+
+*.log
+.DS_Store
+._*
+.idea/
+.vscode/
+
+**/logs/

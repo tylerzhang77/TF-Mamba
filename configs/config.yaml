@@ -1,0 +1,78 @@
+# Example config: set paths and hyperparameters locally. Skeleton npy time length T must match num_frame (here 240).
+experiment:
+  name: "run"
+  description: "template"
+  seed: 42
+  gpu: "0"
+
+data:
+  use_split: false
+  split_dir: null
+  data_dir: "./data"
+  action_type: "LA"
+  batch_size: 32
+  num_workers: 4
+  use_hht_features: false
+  hht_subdir: "hht"
+  hht_stem_suffix: "_hht"
+  hht_feature_dim: 10
+
+model:
+  name: "GraphMamba"
+  num_class: 4
+  num_point: 24
+  num_person: 1
+  num_frame: 240
+  in_channels: 3
+  graph: "graph.hybrik.Graph"
+  graph_args:
+    labeling_mode: "spatial"
+  drop_out: 0
+  adaptive: true
+  alpha: false
+  use_hht_injection: false
+  hht_in_channels: 10
+  cl_mode: "ST-Multi-Level"
+  multi_cl_weights: [1.0, 1.0]
+  cl_version: "V0"
+
+training:
+  epochs: 80
+  lr: 0.001
+  weight_decay: 0.001
+  optimizer: "AdamW"
+  scheduler: "cosine"
+  label_smoothing: 0.1
+  warmup_epochs: 5
+  w_cl_loss: 0.3
+  start_cl_epoch: 5
+  use_class_weights: true
+  class_weight_method: "inverse"
+  scheduler_args:
+    cosine:
+      T_max: 100
+      eta_min: 1.0e-5
+  grad_clip_norm: 1.0
+  use_amp: false
+
+cross_validation:
+  n_folds: 5
+  fold: 0
+  use_stratified: true
+
+checkpoint:
+  dir: "checkpoint"
+  save_freq: 10
+  keep_last_n: 5
+
+logging:
+  use_tensorboard: true
+  log_freq: 10
+  plot_confusion_matrix_freq: 10
+
+resume:
+  enabled: false
+  checkpoint_path: null
+
+evaluation:
+  eval_only: false

@@ -1,0 +1,16 @@
+# Install PyTorch for your CUDA version: https://pytorch.org
+torch>=2.0.0
+numpy>=1.21
+PyYAML>=6.0
+scikit-learn>=1.0
+matplotlib>=3.5
+seaborn>=0.12
+tqdm>=4.64
+einops>=0.6
+
+# GraphMamba topological branch (see torch-topological docs if install fails)
+torch-topological
+
+# utils: HHT feature export (CEEMDAN + Hilbert)
+PyEMD>=1.0.0
+scipy>=1.9
